@@ -1,0 +1,41 @@
+# dbt profiles configuration for DuckDB
+dbt_iceberg_project:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: '/opt/airflow/duckdb/analytics.duckdb'
+      threads: 4
+      timeout_seconds: 300
+      
+      # Iceberg catalog configuration
+      iceberg_catalogs:
+        iceberg:
+          type: rest
+          uri: http://minio:9000
+          warehouse: s3://iceberg/warehouse
+          s3_access_key_id: minioadmin
+          s3_secret_access_key: minioadmin
+          s3_endpoint: http://minio:9000
+          s3_path_style_access: true
+      
+      # Seed configuration
+      load_target_schema: true
+      
+    prod:
+      type: duckdb
+      path: '/opt/airflow/duckdb/analytics_prod.duckdb'
+      threads: 8
+      timeout_seconds: 300
+      
+      iceberg_catalogs:
+        iceberg:
+          type: rest
+          uri: http://minio:9000
+          warehouse: s3://iceberg/warehouse
+          s3_access_key_id: minioadmin
+          s3_secret_access_key: minioadmin
+          s3_endpoint: http://minio:9000
+          s3_path_style_access: true
+      
+      load_target_schema: true
