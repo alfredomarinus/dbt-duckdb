@@ -89,7 +89,7 @@ services:
 
   dbt:
     build:
-      context: ${AIRFLOW_PROJ_DIR}/minio/dbt
+      context: ./minio/dbt
       dockerfile: Dockerfile
     container_name: dbt
     environment:
@@ -99,8 +99,8 @@ services:
       MINIO_BUCKET: ${MINIO_BUCKET}
       TZ: Asia/Kuala_Lumpur
     volumes:
-      - ${AIRFLOW_PROJ_DIR}/minio/dbt/dbt_project:/dbt/dbt_project
-      - ${AIRFLOW_PROJ_DIR}/minio/dbt/profiles.yml:/root/.dbt/profiles.yml
+      - ./minio/dbt/dbt_project:/dbt/dbt_project
+      - ./minio/dbt/profiles.yml:/root/.dbt/profiles.yml
       - dbt-cache-volume:/root/.dbt
     working_dir: /dbt/dbt_project
     command: tail -f /dev/null
