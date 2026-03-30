@@ -205,7 +205,6 @@ services:
     depends_on:
       <<: *airflow-common-depends-on
     restart: no
-    profiles: ["do_not_prompt"]
 
   airflow-cli:
     <<: *airflow-common
