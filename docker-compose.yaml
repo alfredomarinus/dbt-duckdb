@@ -105,7 +105,7 @@ services:
 
   dbt:
     build:
-      context: ./minio/dbt
+      context: ./dbt
       dockerfile: Dockerfile
     container_name: dbt
     environment:
@@ -115,14 +115,24 @@ services:
       MINIO_BUCKET: ${MINIO_BUCKET}
       TZ: Asia/Kuala_Lumpur
     volumes:
-      - ./minio/dbt/dbt_project:/dbt/dbt_project
-      - ./minio/dbt/profiles.yml:/root/.dbt/profiles.yml
+      - ./dbt/dbt_project:/dbt/dbt_project
+      - ./dbt/profiles.yml:/root/.dbt/profiles.yml
+      - ./dbt/duckdb:/dbt/duckdb
+      - ./dbt/.duckdb/extensions:/root/.duckdb/extensions
       - dbt-cache-volume:/root/.dbt
     working_dir: /dbt/dbt_project
     command: tail -f /dev/null
     depends_on:
       minio:
         condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD-SHELL", "dbt --version && curl -s -f http://minio:9000/minio/health/ready > /dev/null"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
     restart: always
 
   airflow-init:
