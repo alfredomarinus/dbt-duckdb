@@ -13,7 +13,7 @@ from airflow.sdk import dag, task
     start_date=datetime(2026, 1, 1),
     schedule='@daily',
     catchup=False,
-    tags=['dbt', 'transformation', 'iceberg'],
+    tags=['dbt', 'transformation', 'duckdb'],
 )
 def example_dbt_transformation_pipeline():
     """

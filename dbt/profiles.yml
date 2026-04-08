@@ -13,7 +13,7 @@ dbt_project:
       s3_secret_access_key: "{{ env_var('MINIO_SECRET_KEY') }}"
       s3_endpoint: "{{ env_var('MINIO_ENDPOINT') }}"
       s3_session_token: ""
-      s3_region: "us-east-1"
+      s3_region: "ap-southeast-5"
       
       load_target_schema: true
       
@@ -27,6 +27,6 @@ dbt_project:
       s3_secret_access_key: "{{ env_var('MINIO_SECRET_KEY') }}"
       s3_endpoint: "{{ env_var('MINIO_ENDPOINT') }}"
       s3_session_token: ""
-      s3_region: "us-east-1"
+      s3_region: "ap-southeast-5"
       
       load_target_schema: true

@@ -1,6 +1,6 @@
-# dbt + DuckDB + Iceberg Data Platform
+# dbt + DuckDB Data Platform
 
-Apache Airflow with CeleryExecutor running dbt transformations on DuckDB with Iceberg tables in MinIO S3 storage.
+Apache Airflow with CeleryExecutor running dbt transformations on DuckDB with MinIO S3 storage.
 
 ## Architecture
 
@@ -14,7 +14,7 @@ Apache Airflow with CeleryExecutor running dbt transformations on DuckDB with Ic
 | **postgres** | Metadata database |
 | **redis** | Celery message broker |
 | **dbt** | Data transformation container with dbt-duckdb |
-| **minio** | S3-compatible storage for Iceberg warehouse |
+| **minio** | S3-compatible object storage |
 | **duckdb** | SQL compute engine (embedded in dbt)  
 
 ## Prerequisites
@@ -27,7 +27,7 @@ Apache Airflow with CeleryExecutor running dbt transformations on DuckDB with Ic
 
 ```bash
 # 1. Clone the repository and navigate to it
-git clone <repo-url> && cd dbt-duckdb-iceberg
+git clone <repo-url> && cd dbt-duckdb
 
 # 2. Copy the example env file and edit as needed
 cp .env.example .env
@@ -64,7 +64,7 @@ make shell           # Open a bash shell in the API server
 ## Project Structure
 
 ```
-dbt-duckdb-iceberg/
+dbt-duckdb/
 ├── airflow/                     # Airflow service
 │   ├── config/
 │   │   └── airflow.cfg
@@ -105,7 +105,7 @@ dbt-duckdb-iceberg/
 
 - **Environment variables:** Edit `.env` (see `.env.example` for reference)
 - **Airflow config:** Edit `config/airflow.cfg` — secrets are injected via env vars
-- **dbt config:** Edit `dbt/profiles.yml` for DuckDB and Iceberg catalog settings
+- **dbt config:** Edit `dbt/profiles.yml` for DuckDB settings
 - **Extra pip packages:** Set `_PIP_ADDITIONAL_REQUIREMENTS` in `.env`
 
 > **⚠️ Security Note:** 
