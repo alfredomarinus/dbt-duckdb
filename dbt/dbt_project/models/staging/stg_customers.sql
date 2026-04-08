@@ -5,5 +5,5 @@ select
     email,
     country,
     current_timestamp as created_at
-from {{ seed('raw_customers') }}
+from {{ ref('raw_customers') }}
 where customer_id is not null

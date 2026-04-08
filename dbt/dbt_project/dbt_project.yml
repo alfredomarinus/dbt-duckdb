@@ -1,17 +1,17 @@
 
 # Name your project! Project names should be snake_case and cannot contain spaces.
-name: 'dbt_iceberg_project'
+name: 'dbt_project'
 version: '1.0.0'
 config-version: 2
 
 # This setting configures which "profile" dbt uses for this project.
-profile: 'dbt_iceberg_project'
+profile: 'dbt_project'
 
 # These configurations specify where dbt should look for different types of files.
 model-paths: ["models"]
 analysis-paths: ["analyses"]
 test-paths: ["tests"]
-data-paths: ["seeds"]
+seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 target-path: "target"
@@ -26,7 +26,7 @@ clean-targets:
 # as tables. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
 models:
-  dbt_iceberg_project:
+  dbt_project:
     # Config indicated by + will be applied to all files under models/example/
     staging:
       +materialized: table
@@ -42,8 +42,7 @@ models:
 vars:
   # MinIO/S3 Configuration
   minio_endpoint: "http://minio:9000"
-  minio_bucket: "iceberg"
-  iceberg_catalog: "iceberg"
+  minio_bucket: "dbt-data"
   
   # DuckDB Configuration
   duckdb_path: "/opt/airflow/duckdb"

@@ -6,5 +6,5 @@ select
     amount,
     order_date,
     current_timestamp as created_at
-from {{ seed('raw_orders') }}
+from {{ ref('raw_orders') }}
 where order_id is not null
