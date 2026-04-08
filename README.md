@@ -72,17 +72,17 @@ dbt-duckdb-iceberg/
 │   │   └── example_dbt_dag.py
 │   ├── plugins/
 │   └── logs/
+├── dbt/                         # dbt project for transformations
+│   ├── Dockerfile
+│   ├── requirements.txt
+│   ├── profiles.yml
+│   └── dbt_project/
+│       ├── dbt_project.yml
+│       ├── models/
+│       ├── tests/
+│       ├── seeds/
+│       └── macros/
 ├── minio/                       # MinIO service (S3-compatible storage)
-│   ├── dbt/                     # dbt project for transformations
-│   │   ├── Dockerfile
-│   │   ├── requirements.txt
-│   │   ├── profiles.yml
-│   │   └── dbt_project/
-│   │       ├── dbt_project.yml
-│   │       ├── models/
-│   │       ├── tests/
-│   │       ├── seeds/
-│   │       └── macros/
 │   └── entrypoint.sh
 ├── .env                         # Environment variables (git-ignored)
 ├── .env.example                 # Template for .env
